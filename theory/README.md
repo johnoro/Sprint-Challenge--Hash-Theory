@@ -57,14 +57,6 @@ This can be represented with boolean algebra like so:
 * `SUM = A ⊕ B`  (alternate: `A ^ B` or `A xor B`)
 * `CARRY = A ∧ B`  (alternate: `A && B`)
 
-def stretch():
-  for a in [False, True]:
-    for b in [False, True]:
-      for c in [False, True]:
-        s = a ^ b ^ c
-        carry = (a and b) or (b and c) or (a and c)
-        print(a, b, c, carry, s)
-
 How can you represent the SUM and CARRY of adding THREE digits with a truth table and in boolean algebra?
 * A + B + C
 ```
