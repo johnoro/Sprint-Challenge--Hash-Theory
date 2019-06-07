@@ -8,3 +8,4 @@ tests
 build
 hash-tables/ex1/ex1
 hash-tables/ex2/ex2
+*.exe
