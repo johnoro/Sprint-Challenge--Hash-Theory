@@ -17,10 +17,12 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
       Answer *ans = malloc(sizeof(Answer));
       ans->index_1 = ind > i ? ind : i;
       ans->index_2 = ind > i ? i : ind;
+      free(ht);
       return ans;
     }
   }
 
+  free(ht);
   return NULL;
 }
 

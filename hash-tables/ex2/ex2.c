@@ -22,6 +22,7 @@ char **reconstruct_trip(Ticket **tickets, int length)
   }
   route[i] = strdup("NONE");
 
+  free(ht);
   return route;
 }
 
