@@ -23,6 +23,11 @@ char *test_ex1()
   mu_assert(answer_4->index_1 == 6, "Your function did not return the expected answer for input {12, 6, 7, 14, 19, 3, 0, 25, 40}");
   mu_assert(answer_4->index_2 == 2, "Your function did not return the expected answer for input {12, 6, 7, 14, 19, 3, 0, 25, 40}");
 
+  free(answer_1);
+  free(answer_2);
+  free(answer_3);
+  free(answer_4);
+
   return NULL;
 }
 

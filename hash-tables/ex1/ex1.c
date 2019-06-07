@@ -56,6 +56,11 @@ int main(void)
   Answer* answer_4 = get_indices_of_item_weights(weights_4, 9, 7);
   print_answer(answer_4);  // {6, 2}
 
+  free(answer_1);
+  free(answer_2);
+  free(answer_3);
+  free(answer_4);
+
   return 0;
 }
 
