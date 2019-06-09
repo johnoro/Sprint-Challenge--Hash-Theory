@@ -6,16 +6,30 @@
 Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 {
   HashTable *ht = create_hash_table(16);
+  
+  for (int i = 0; i < length; i++)
+    hash_table_insert(ht, weights[i], i);
+  
+  for (int i = 0; i < length; i++) {
+    int weight = weights[i];
+    int ind = hash_table_retrieve(ht, limit - weight);
+    if (ind != -1) {
+      Answer *ans = malloc(sizeof(Answer));
+      ans->index_1 = ind > i ? ind : i;
+      ans->index_2 = ind > i ? i : ind;
+      free(ht);
+      return ans;
+    }
+  }
 
-  /* YOUR CODE HERE */
-
+  free(ht);
   return NULL;
 }
 
 void print_answer(Answer *answer)
 {
   if (answer != NULL) {
-    printf("%d %d\n", answer->index_1, answer->index_2);
+    printf("{%d, %d}\n", answer->index_1, answer->index_2);
   } else {
     printf("NULL\n");
   }
@@ -43,6 +57,11 @@ int main(void)
   int weights_4[] = {12, 6, 7, 14, 19, 3, 0, 25, 40};
   Answer* answer_4 = get_indices_of_item_weights(weights_4, 9, 7);
   print_answer(answer_4);  // {6, 2}
+
+  free(answer_1);
+  free(answer_2);
+  free(answer_3);
+  free(answer_4);
 
   return 0;
 }

@@ -8,19 +8,37 @@ char **reconstruct_trip(Ticket **tickets, int length)
 {
   HashTable *ht = create_hash_table(length);
   char **route = malloc(length * sizeof(char *));
+  int i = 0;
 
-  /* YOUR CODE HERE */
+  for (; i < length; i++) {
+    hash_table_insert(ht, tickets[i]->source, tickets[i]->destination);
+  }
 
+  i = 0;
+  char *dest = hash_table_retrieve(ht, "NONE");
+  while (strcmp(dest, "NONE") != 0) {
+    route[i++] = strdup(dest);
+    dest = hash_table_retrieve(ht, dest);
+  }
+  route[i] = strdup("NONE");
+
+  free(ht);
   return route;
 }
 
 void print_route(char **route, int length)
 {
-  for (int i = 0; i < length; i++) {
-    printf("%s\n", route[i]);
-  }
+  int i = 0;
+  for (; i < length-1; i++)
+    printf("%s, ", route[i]);
+  printf("%s\n", route[i]);
 }
 
+void free_route(char **route, int length) {
+  for (int i = 0; i < length; i++)
+    free(route[i]);
+  free(route);
+}
 
 
 #ifndef TESTING
@@ -44,13 +62,16 @@ int main(void)
   ticket_3->destination = "NONE";
   tickets[2] = ticket_3;
 
-  print_route(reconstruct_trip(tickets, 3), 3); // PDX, DCA, NONE
+  char **route = reconstruct_trip(tickets, 3);
+  print_route(route, 3); // PDX, DCA, NONE
 
   for (int i = 0; i < 3; i++) {
     free(tickets[i]);
   }
 
   free(tickets);
+
+  free_route(route, 3);
 
   return 0;
 }
